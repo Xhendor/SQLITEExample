@@ -19,5 +19,6 @@ public class ModifyCountryActivity extends AppCompatActivity {
         String country=intent.getStringExtra("country");
         String desc= intent.getStringExtra("desc");
         _id=Long.parseLong(id);
+
     }
 }
