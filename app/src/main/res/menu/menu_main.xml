@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.uabc.edu.sqlite.MainActivity">
+    <item
+        android:id="@+id/add_setting"
+        android:orderInCategory="100"
+        android:title="@string/add_record"
+        app:showAsAction="never" />
+</menu>
