@@ -1,5 +1,6 @@
 package com.uabc.edu.sqlite;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,12 +12,20 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private DBManager dbManager;
     private ListView listView;
+    private SimpleCursorAdapter scAdapter;
+    final String[] from = new String[] { DatabaseHelper._ID,
+            DatabaseHelper.SUBJECT, DatabaseHelper.DESC };
+
+   final int[] to = new int[] { R.id.id, R.id.country, R.id.desc };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,30 @@ public class MainActivity extends AppCompatActivity {
 //        });
         dbManager=new DBManager(this);
         dbManager.open();
+        Cursor cursor=dbManager.fetch();
+        listView=findViewById(R.id.list_view);
+        listView.setEmptyView(findViewById(R.id.empty));
+        scAdapter= new SimpleCursorAdapter(this,R.layout.renglon,cursor,
+                from,to,0);
+        scAdapter.notifyDataSetChanged();
+        listView.setAdapter(scAdapter);
+        listView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent,
+                                    View view, int position,
+                                    long id) {
+                TextView idTV=view.findViewById(R.id.id);
+                TextView titleTV=view.findViewById(R.id.country);
+                TextView descTV=view.findViewById(R.id.desc);
+
+
+
+            }
+        });
+
+
+
     }
 
     @Override
