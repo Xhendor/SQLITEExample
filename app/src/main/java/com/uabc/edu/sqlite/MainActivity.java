@@ -1,5 +1,6 @@
 package com.uabc.edu.sqlite;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -61,7 +62,17 @@ public class MainActivity extends AppCompatActivity {
                 TextView idTV=view.findViewById(R.id.id);
                 TextView titleTV=view.findViewById(R.id.country);
                 TextView descTV=view.findViewById(R.id.desc);
+                String _id = idTV.getText().toString();
+                String title = titleTV.getText().toString();
+                String desc = descTV.getText().toString();
 
+                Intent modify_intent = new Intent(getApplicationContext(),
+                        ModifyCountryActivity.class);
+                modify_intent.putExtra("country", title);
+                modify_intent.putExtra("desc", desc);
+                modify_intent.putExtra("id", _id);
+
+                startActivity(modify_intent);
 
 
             }
@@ -87,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.add_setting) {
-            return true;
+             Intent add=new Intent(this,
+                     AddCountryActivity.class);
+             startActivity(add);
         }
 
         return super.onOptionsItemSelected(item);

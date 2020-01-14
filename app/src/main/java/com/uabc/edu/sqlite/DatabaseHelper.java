@@ -8,38 +8,40 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    //Nombre de la tabla
-    public static final String TABLE_NAME="COUNTRIES";
-    //Columnas
-    public static final String _ID="_id";
-    public static final String SUBJECT="subject";
-    public static final String DESC="description";
+    // Table Name
+    public static final String TABLE_NAME = "COUNTRIES";
 
-    //Database NAME
-    public static final String DB_NAME="DEV_COUNTRIES.DB";
+    // Table columns
+    public static final String _ID = "_id";
+    public static final String SUBJECT = "subject";
+    public static final String DESC = "description";
 
-    //version
-    static final int DB_VERSION= 1;
+    // Database Information
+    static final String DB_NAME = "JOURNALDEV_COUNTRIES.DB";
 
-    private final String CREATE_TABLE="create table "+ TABLE_NAME +
-            " ("+ _ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+ SUBJECT+
-            "TEXT NOT NULL,"+ DESC +" TEXT)";
+    // database version
+    static final int DB_VERSION = 1;
 
-    public DatabaseHelper(@Nullable Context context) {
+    // Creating table query
+    private static final String CREATE_TABLE = "create table "
+            + TABLE_NAME + "(" + _ID
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + SUBJECT + " TEXT NOT NULL, " + DESC
+            + " TEXT);";
+
+    public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-            db.execSQL(CREATE_TABLE);
+        db.execSQL(CREATE_TABLE);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db,
-                          int oldVersion,
-                          int newVersion) {
-        //RESPALDAR y DESPUES BORRAR
-        db.execSQL("DROP TABLE IF EXISTS "+ TABLE_NAME);
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 }
+
